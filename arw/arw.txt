@@ -1,0 +1,11 @@
+"gamemode"
+{
+    "title"     "American Revolutionary War RP"
+    "maps"      "^arw_"
+    "base"      "base"
+    "menusystem"	"1"
+
+    "author_name"   "Senpai Noodles and Iamgoofball"
+    "author_email"  "n/a"
+    "author_url"    "http://steamcommunity.com/groups/electricmangocommunity"
+}
