@@ -18,7 +18,8 @@ GM.Website 	= "N/A"
 			F. Make sure that the number inside Objectives[] is the next number in the sequence.
 			G. Repeat these steps for as many Objectives and TeaCrates as you want to add, or to add the required stuff like Barricades, player spawns, and the KOTH point!
 		6. Set up the weapons, following the instructions listed there.
-		7. Launch the server, and enjoy!
+		7. Edit the rank playermodels to be what you want them to be for the two teams.
+		8. Launch the server, and enjoy!
 
 ]]--
 
@@ -221,7 +222,7 @@ Objectives[3] = {pos = Vector(59.757538, -1851.403320, 134.939987), letter = "C"
 Objectives[4] = {pos = Vector(124.558128, -5437.647949, 219.013824), letter = "D"}
 
 TeaCrates = {}
-
+-- All the objectives for Tea Party(or whatever you rename it). Feel free to add/remove as many as you like, as long as there is at least one on the map.
 TeaCrates[1] = {pos = Vector(557.825806, -5619.362793, 249.031250)}
 TeaCrates[2] = {pos = Vector(547.544678, -5846.391113, 249.031250)}
 TeaCrates[3] = {pos = Vector(345.031311, -5957.604004, 249.031250)}
@@ -251,7 +252,7 @@ TeaCrates[20] = {pos = Vector(553.439331, 3409.010010, 266.337585)}
 TeaCrates[21] = {pos = Vector(734.179993, 3101.103516, 263.925964)}
 
 Rank = {}
-
+-- Ensure these playermodels are set to the ones you want to use for gameplay.
 Rank[Config["Team1PrettyName"] .. "-Private"] = {name = "Private", model = "models/kriegsyntax/awoi/rebels/private/playermodel.mdl"}
 Rank[Config["Team2PrettyName"] .. "-Private"] = {name = "Private", model = "models/kriegsyntax/awoi/british/private/playermodel.mdl"}
 
