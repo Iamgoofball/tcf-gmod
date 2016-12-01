@@ -101,7 +101,7 @@ function hud()
 		draw.RoundedBox( 4, ScrW() / 2 - 55, ScrH() - posi, 50, 50, Color(0,0,0,150) )
 
 		surface.SetDrawColor(255,255,255)
-		surface.SetMaterial( Material(  "materials/gui/american-icon.png" ) )
+		surface.SetMaterial( Material(Config["Team1Icon"]) )
 		surface.DrawTexturedRect(ScrW() / 2 - 50, ScrH() - posi + 5, 40, 40 )
 		
 		draw.SimpleText(GetGlobalInt("AmericanKills"), "Basic_Font_3D_Small", ScrW() / 2 - 55 + 25, ScrH() - posi + 22, Color(255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -110,7 +110,7 @@ function hud()
 		draw.RoundedBox( 4, ScrW() / 2 + 5, ScrH() - posi, 50, 50, Color(0,0,0,150) )
 
 		surface.SetDrawColor(255,255,255)
-		surface.SetMaterial( Material(  "materials/gui/british-icon.png" ) )
+		surface.SetMaterial( Material(Config["Team2Icon"]) )
 		surface.DrawTexturedRect(ScrW() / 2 + 10, ScrH() - posi + 5, 40, 40 )
 		
 		draw.SimpleText(GetGlobalInt("BritishKills"), "Basic_Font_3D_Small", ScrW() / 2 + 5 + 25, ScrH() - posi + 22, Color(255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -129,7 +129,7 @@ function hud()
 		draw.RoundedBox( 4, ScrW() / 2 - 25, ScrH() - posi + 5, 50, 50, Color(0,0,0,150) )
 
 		surface.SetDrawColor(255,255,255)
-		surface.SetMaterial( Material(  "materials/gui/british-icon.png" ) )
+		surface.SetMaterial( Material(Config["Team2Icon"]) )
 		surface.DrawTexturedRect(ScrW() / 2 - 20, ScrH() - posi + 10, 40, 40 )
 		
 		draw.SimpleText(GetGlobalInt("TeaCratesLeft"), "Basic_Font_3D_Small", ScrW() / 2, ScrH() - posi + 28, Color(255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -174,7 +174,7 @@ function hud()
 	if LocalPlayer():Team() == 2 then
 		surface.SetMaterial( Material( Config["Team1Icon"] ) )  --Use dir icon16/ for silkicons
 	else
-		surface.SetMaterial( Material(Config["Team2Icon") )  --Use dir icon16/ for silkicons
+		surface.SetMaterial( Material(Config["Team2Icon"]) )  --Use dir icon16/ for silkicons
 	end
 	surface.DrawTexturedRect(ScrW() - 55, ScrH()-55,50,50)
 

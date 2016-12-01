@@ -36,6 +36,8 @@ Config["Team1PrettyName"] = "American"
 Config["Team2PrettyName"] = "British"
 Config["Team1Icon"] = "materials/gui/american-icon.png"
 Config["Team2Icon"] = "materials/gui/british-icon.png"
+Config["Team1MenuModel"] = "models/kriegsyntax/awoi/rebels/private/playermodel.mdl"
+Config["Team2MenuModel"] = "models/kriegsyntax/awoi/british/private/playermodel.mdl"
 Config["GM.Team1Color"] = Color( 0, 51, 102, 255 )
 Config["GM.Team2Color"] = Color( 102, 0, 0, 255 )
 Config["Team1Win"] = "the Americans won!"
@@ -57,6 +59,8 @@ Config["TeaPartyDescriptionFinish"] = " seconds while the Rebels destroy them!"
 Config["TeaPartyCrateModel"] = "models/props/de_inferno/wine_barrel.mdl"
 
 -- Other options for configuration.
+Config["RestTime"] = 60
+Config["RoundTime"] = 300
 Config["regen-delay"] = 15 
 Config["kill-reward"] = 100 -- higher rank kills is this * 2 exp
 Config["barricade-reward"] = 200 -- exp

@@ -9,21 +9,23 @@ AddCSLuaFile( "shared.lua" )
 
 MsgN("_-_-_-_- Server Files -_-_-_-_")
 MsgN("Loading Server Files")
-for _, file in pairs (file.Find(Config["FolderName"] .. "gamemode/server/*.lua", "LUA")) do
+for _, file in pairs (file.Find(Config["FolderName"] .. "/gamemode/server/*.lua", "LUA")) do
    MsgN("-> "..file)
-   include(Config["FolderName"] .. "gamemode/server/"..file) 
+   include(Config["FolderName"] .. "/gamemode/server/"..file) 
 end
 
 MsgN("_-_-_-_- Shared Files -_-_-_-_")
-for _, file in pairs (file.Find(Config["FolderName"] .. "gamemode/shared/*.lua", "LUA")) do
+MsgN("Loading Shared Files")
+for _, file in pairs (file.Find(Config["FolderName"] .. "/gamemode/shared/*.lua", "LUA")) do
    MsgN("-> "..file)
-   AddCSLuaFile(Config["FolderName"] .. "gamemode/shared/"..file)
+   AddCSLuaFile(Config["FolderName"] .. "/gamemode/shared/"..file)
 end
 
 MsgN("_-_-_-_- Client Files -_-_-_-_")
-for _, file in pairs (file.Find(Config["FolderName"] .. "gamemode/client/*.lua", "LUA")) do
+MsgN("Loading Client Files")
+for _, file in pairs (file.Find(Config["FolderName"] .. "/gamemode/client/*.lua", "LUA")) do
    MsgN("-> "..file)
-   AddCSLuaFile(Config["FolderName"] .. "gamemode/client/"..file)
+   AddCSLuaFile(Config["FolderName"] .. "/gamemode/client/"..file)
 end
 
 
@@ -50,8 +52,8 @@ local round = {}
 
 -- Variables
 round.PrepTime	= 30	-- 30 second prep
-round.Rest	= 60	-- 30 second breaks
-round.Time	= 300	-- 5 minute rounds
+round.Rest	= Config["RestTime"]	-- 30 second breaks
+round.Time	= Config["RoundTime"]	-- 5 minute rounds
 
 function round.Broadcast(Text)
 

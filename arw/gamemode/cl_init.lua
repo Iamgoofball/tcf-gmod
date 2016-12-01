@@ -57,9 +57,9 @@ hook.Add( "PostPlayerDraw", "DrawVIP", DrawVIP )
 include("shared.lua")
 
 MsgN("Loading Clientside Files")
-for _, file in pairs(file.Find(Config["FolderName"]gamemode/client/*.lua", "LUA")) do
+for _, file in pairs(file.Find(Config["FolderName"] .. "/gamemode/client/*.lua", "LUA")) do
 	MsgN("-> "..file)
-	include(Config["FolderName"]gamemode/client/"..file)
+	include(Config["FolderName"] .. "/gamemode/client/"..file)
 end
 
 surface.CreateFont( "Basic_Font_Screen", {
@@ -133,4 +133,4 @@ hook.Add( "RenderScreenspaceEffects", "dildo_mcnugget", function()
 	RunConsoleCommand("pp_vignette_passes", "1")
 end )
 
-IncludePlugins(Config["FolderName"]gamemode/plugins/") -- load last
+IncludePlugins(Config["FolderName"] .. "/gamemode/plugins/") -- load last
