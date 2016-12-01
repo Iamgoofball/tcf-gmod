@@ -1,9 +1,9 @@
 //Made this for use with client/server, in an attempt to prevent repeat functions. IncludePlugins is no longer used - sportsfreak
-local fil, Folders = file.Find("gamemodes/arw/gamemode/plugins/*", "GAME")
+local fil, Folders = file.Find("gamemodes/".. Config["FolderName"] .. "/gamemode/plugins/*", "GAME")
 print("LOADING PLUGINS! TOTAL TO LOAD: ", table.Count(Folders))
 for i,v in pairs(Folders) do
 	
-	local Files = file.Find("gamemodes/arw/gamemode/plugins/"..v.."/*.lua", "GAME")
+	local Files = file.Find("gamemodes/" .. Config["FolderName"] .. "/gamemode/plugins/"..v.."/*.lua", "GAME")
 	for q,w in pairs(Files) do
 		if string.find(w,"sh") == 1 then
 			include("plugins/"..v.."/"..w)

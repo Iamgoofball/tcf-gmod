@@ -9,21 +9,21 @@ AddCSLuaFile( "shared.lua" )
 
 MsgN("_-_-_-_- Server Files -_-_-_-_")
 MsgN("Loading Server Files")
-for _, file in pairs (file.Find("arw/gamemode/server/*.lua", "LUA")) do
+for _, file in pairs (file.Find(Config["FolderName"] .. "gamemode/server/*.lua", "LUA")) do
    MsgN("-> "..file)
-   include("arw/gamemode/server/"..file) 
+   include(Config["FolderName"] .. "gamemode/server/"..file) 
 end
 
 MsgN("_-_-_-_- Shared Files -_-_-_-_")
-for _, file in pairs (file.Find("arw/gamemode/shared/*.lua", "LUA")) do
+for _, file in pairs (file.Find(Config["FolderName"] .. "gamemode/shared/*.lua", "LUA")) do
    MsgN("-> "..file)
-   AddCSLuaFile("arw/gamemode/shared/"..file)
+   AddCSLuaFile(Config["FolderName"] .. "gamemode/shared/"..file)
 end
 
 MsgN("_-_-_-_- Client Files -_-_-_-_")
-for _, file in pairs (file.Find("arw/gamemode/client/*.lua", "LUA")) do
+for _, file in pairs (file.Find(Config["FolderName"] .. "gamemode/client/*.lua", "LUA")) do
    MsgN("-> "..file)
-   AddCSLuaFile("arw/gamemode/client/"..file)
+   AddCSLuaFile(Config["FolderName"] .. "gamemode/client/"..file)
 end
 
 
@@ -166,25 +166,25 @@ function round.RestTime()
 			end
 
 		end
-		
-		local freedom_fighters = {}
-		local the_empire = {}
-		local chosen_rebel
-		local chosen_brit
-		for k,v in pairs(player.GetAll()) do
-			if team.GetName(v:Team()) == Config["Team2PrettyName"] then
-				table.insert(the_empire, v)
-			elseif team.GetName(v:Team()) == Config["Team1PrettyName"] then
-				table.insert(freedom_fighters, v)
+		if Config["VoiceActing"] == true then
+			local freedom_fighters = {}
+			local the_empire = {}
+			local chosen_rebel
+			local chosen_brit
+			for k,v in pairs(player.GetAll()) do
+				if team.GetName(v:Team()) == Config["Team2PrettyName"] then
+					table.insert(the_empire, v)
+				elseif team.GetName(v:Team()) == Config["Team1PrettyName"] then
+					table.insert(freedom_fighters, v)
+				end
 			end
+			chosen_brit = table.Random(the_empire)
+			chosen_rebel = table.Random(freedom_fighters)
+			local sounds_b = {1,4}
+			local sounds_r = {1,6}
+			chosen_brit:EmitSound("voice/" .. Config["Team2Name"] .. "/jeers/" .. Config["Team2Name"] .. "-jeers-"..table.Random(sounds_b)..".wav")
+			chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/cheers/" .. Config["Team1Name"] .. "-cheers-"..table.Random(sounds_r)..".wav")
 		end
-		chosen_brit = table.Random(the_empire)
-		chosen_rebel = table.Random(freedom_fighters)
-		local sounds_b = {1,4}
-		local sounds_r = {1,6}
-		chosen_brit:EmitSound("voice/" .. Config["Team2Name"] .. "/jeers/" .. Config["Team2Name"] .. "-jeers-"..table.Random(sounds_b)..".wav")
-		chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/cheers/" .. Config["Team1Name"] .. "-cheers-"..table.Random(sounds_r)..".wav")
-		
 	elseif victory_for_imperialism > victory_for_freedom then
 	
 		who_won = Config["Team2Win"]
@@ -205,24 +205,25 @@ function round.RestTime()
 			
 		end
 
-		local freedom_fighters = {}
-		local the_empire = {}
-		local chosen_rebel
-		local chosen_brit
-		for k,v in pairs(player.GetAll()) do
-			if team.GetName(v:Team()) == Config["Team2PrettyName"] then
-				table.insert(the_empire, v)
-			elseif team.GetName(v:Team()) == Config["Team1PrettyName"] then
-				table.insert(freedom_fighters, v)
+		if Config["VoiceActing"] == true then
+			local freedom_fighters = {}
+			local the_empire = {}
+			local chosen_rebel
+			local chosen_brit
+			for k,v in pairs(player.GetAll()) do
+				if team.GetName(v:Team()) == Config["Team2PrettyName"] then
+					table.insert(the_empire, v)
+				elseif team.GetName(v:Team()) == Config["Team1PrettyName"] then
+					table.insert(freedom_fighters, v)
+				end
 			end
+			chosen_brit = table.Random(the_empire)
+			chosen_rebel = table.Random(freedom_fighters)
+			local sounds_b = {1,2}
+			local sounds_r = {1,8}
+			chosen_brit:EmitSound("voice/" .. Config["Team2Name"] .. "/cheers/" .. Config["Team2Name"] .. "-cheers-"..table.Random(sounds_b)..".wav")
+			chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/jeers/" .. Config["Team1Name"] .. "-taunt-"..table.Random(sounds_r)..".wav")
 		end
-		chosen_brit = table.Random(the_empire)
-		chosen_rebel = table.Random(freedom_fighters)
-		local sounds_b = {1,2}
-		local sounds_r = {1,8}
-		chosen_brit:EmitSound("voice/" .. Config["Team2Name"] .. "/cheers/" .. Config["Team2Name"] .. "-cheers-"..table.Random(sounds_b)..".wav")
-		chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/jeers/" .. Config["Team1Name"] .. "-taunt-"..table.Random(sounds_r)..".wav")
-		
 	elseif victory_for_freedom == victory_for_imperialism then
 	
 		who_won = Config["TieWin"]
@@ -240,23 +241,25 @@ function round.RestTime()
 			end
 			
 		end
-		local freedom_fighters = {}
-		local the_empire = {}
-		local chosen_rebel
-		local chosen_brit
-		for k,v in pairs(player.GetAll()) do
-			if team.GetName(v:Team()) == Config["Team2PrettyName"] then
-				table.insert(the_empire, v)
-			elseif team.GetName(v:Team()) == Config["Team1PrettyName"] then
-				table.insert(freedom_fighters, v)
+		if Config["VoiceActing"] == true then
+			local freedom_fighters = {}
+			local the_empire = {}
+			local chosen_rebel
+			local chosen_brit
+			for k,v in pairs(player.GetAll()) do
+				if team.GetName(v:Team()) == Config["Team2PrettyName"] then
+					table.insert(the_empire, v)
+				elseif team.GetName(v:Team()) == Config["Team1PrettyName"] then
+					table.insert(freedom_fighters, v)
+				end
 			end
+			chosen_brit = table.Random(the_empire)
+			chosen_rebel = table.Random(freedom_fighters)
+			local sounds_b = {1,4}
+			local sounds_r = {1,8}
+			chosen_brit:EmitSound("voice/" .. Config["Team2Name"] .. "/jeers/" .. Config["Team2Name"] .. "-jeers-"..table.Random(sounds_b)..".wav")
+			chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/jeers/" .. Config["Team1Name"] .. "-taunt-"..table.Random(sounds_r)..".wav")
 		end
-		chosen_brit = table.Random(the_empire)
-		chosen_rebel = table.Random(freedom_fighters)
-		local sounds_b = {1,4}
-		local sounds_r = {1,8}
-		chosen_brit:EmitSound("voice/" .. Config["Team2Name"] .. "/jeers/" .. Config["Team2Name"] .. "-jeers-"..table.Random(sounds_b)..".wav")
-		chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/jeers/" .. Config["Team1Name"] .. "-taunt-"..table.Random(sounds_r)..".wav")
 	end
 	
 	for k,v in pairs(ents.GetAll()) do
@@ -655,7 +658,9 @@ function round.CheckRound()
 		if (RealTime() - GetGlobalInt("StateStartTime")) > round.PrepTime then
 		
 			round.CapturePoint()
-			round.PrepLines()
+			if Config["VoiceActing"] == true then
+				round.PrepLines()
+			end
 			
 		end
 		
@@ -805,19 +810,21 @@ function GM:PlayerDeath( victim, inflictor, attacker )
 		end
 		
 		attacker:SendLua("surface.PlaySound('soundtrack/kill_enemy.wav')")
-	victim:AddDeaths(1)
-	local chance = math.random(1,10)
-	if victim:Team() == 2 then
-		victim:EmitSound("voice/" .. Config["Team1Name"] .. "/death/" .. Config["Team1Name"] .. "-death-"..math.random(1,7)..".wav")
-		if chance == 1 then
-			attacker:EmitSound("voice/" .. Config["Team2Name"] .. "/battle_cry/" .. Config["Team2Name"] .. "-battle_cry-"..math.random(1,2)..".wav")
-		end
-	elseif victim:Team() == 3 then
-		victim:EmitSound("voice/" .. Config["Team2Name"] .. "/death/" .. Config["Team2Name"] .. "-deathcry-"..math.random(1,8)..".wav")
-		if chance == 1 then
-			attacker:EmitSound("voice/" .. Config["Team1Name"] .. "/battle_cry/" .. Config["Team1Name"] .. "-battlecry-"..math.random(1,2)..".wav")
-		end
 	end
+	victim:AddDeaths(1)
+	if Config["VoiceActing"] == true then
+		local chance = math.random(1,10)
+		if victim:Team() == 2 then
+			victim:EmitSound("voice/" .. Config["Team1Name"] .. "/death/" .. Config["Team1Name"] .. "-death-"..math.random(1,7)..".wav")
+			if chance == 1 then
+				attacker:EmitSound("voice/" .. Config["Team2Name"] .. "/battle_cry/" .. Config["Team2Name"] .. "-battle_cry-"..math.random(1,2)..".wav")
+			end
+		elseif victim:Team() == 3 then
+			victim:EmitSound("voice/" .. Config["Team2Name"] .. "/death/" .. Config["Team2Name"] .. "-deathcry-"..math.random(1,8)..".wav")
+			if chance == 1 then
+				attacker:EmitSound("voice/" .. Config["Team1Name"] .. "/battle_cry/" .. Config["Team1Name"] .. "-battlecry-"..math.random(1,2)..".wav")
+			end
+		end
 	end
 end
 
