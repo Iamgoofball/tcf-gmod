@@ -32,7 +32,7 @@ function teammenu()
 	local Americanicon = vgui.Create( "DModelPanel", Menu )
 	Americanicon:SetPos( 100, 200 )
 	Americanicon:SetSize( 350, 400 )
-	Americanicon:SetModel( "models/kriegsyntax/awoi/rebels/private/playermodel.mdl" ) 
+	Americanicon:SetModel( Rank[Config["Team1PrettyName"] .. "-Private"] ) 
 	function Americanicon:LayoutEntity( Entity ) return end 
 	function Americanicon.Entity:GetPlayerColor() return Vector ( 1, 0, 0 ) end 
 	
@@ -62,7 +62,7 @@ function teammenu()
 	local Britishicon = vgui.Create( "DModelPanel", Menu )
 	Britishicon:SetPos( Menu:GetWide() - 450, 200 )
 	Britishicon:SetSize( 350, 400 )
-	Britishicon:SetModel( "models/kriegsyntax/awoi/british/private/playermodel.mdl" ) 
+	Britishicon:SetModel( Rank[Config["Team2PrettyName"] .. "-Private"] ) 
 	function Britishicon:LayoutEntity( Entity ) return end 
 	function Britishicon.Entity:GetPlayerColor() return Vector ( 1, 0, 0 ) end 
 	

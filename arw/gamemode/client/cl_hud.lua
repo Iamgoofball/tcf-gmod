@@ -171,7 +171,11 @@ function hud()
 
 	
 	surface.SetDrawColor(255,255,255)
-	surface.SetMaterial( Material(  "materials/gui/"..team.GetName( LocalPlayer():Team() ).."-icon.png" ) )  --Use dir icon16/ for silkicons
+	if LocalPlayer():Team() == 2 then
+		surface.SetMaterial( Material( Config["Team1Icon"] ) )  --Use dir icon16/ for silkicons
+	else
+		surface.SetMaterial( Material(Config["Team2Icon") )  --Use dir icon16/ for silkicons
+	end
 	surface.DrawTexturedRect(ScrW() - 55, ScrH()-55,50,50)
 
 	if LocalPlayer().is_voicechat == true then
