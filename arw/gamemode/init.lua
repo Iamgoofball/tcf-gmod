@@ -58,11 +58,8 @@ round.Time	= Config["RoundTime"]	-- 5 minute rounds
 function round.Broadcast(Text)
 
 	for k, v in pairs(player.GetAll()) do
-	
 		v:SendLua("GAMEMODE:AddNotify(\""..Text.."\", NOTIFY_GENERIC, 10)")
-		
 	end
-	
 	print(Text)
 	
 end
@@ -83,30 +80,16 @@ function round.RestTime()
 		if team.GetName( ply:Team() ) != "Undecieded" then
 		
 			round.LoadoutSpawning( ply )
+
+			ply:SetPos(Location[team.GetName( ply:Team() ).."-spawn"].pos)
 			
-			if team.GetName(ply:Team()) == Config["Team2PrettyName"] then
+			if ply:GetPos() != Location[team.GetName( ply:Team() ).."-spawn"].pos then
 			
-				ply:SetPos(Vector(8888.750977, 2070.588867, 195.946396))
-				
-				if ply:GetPos() != Vector(8888.750977, 2070.588867, 195.946396) then
-				
-					print("FUCK")
-					ply:SetPos(Vector(8888.750977, 2070.588867, 195.946396))
-					
-				end
-				
-			elseif team.GetName(ply:Team()) == Config["Team1PrettyName"] then
-			
-				ply:SetPos(Vector(-7397.078613, -1323.084473, 196.989029))
-				
-				if ply:GetPos() != Vector(-7397.078613, -1323.084473, 196.989029) then
-				
-					print("FUCK")
-					ply:SetPos(Vector(-7397.078613, -1323.084473, 196.989029))
-					
-				end
+				print("FUCK")
+				ply:SetPos(Location[team.GetName( ply:Team() ).."-spawn"].pos)
 				
 			end
+				
 			
 		end
 		
@@ -294,40 +277,25 @@ function round.Prep()
 			round.LoadoutSpawning( ply )
 
 			net.Start( "playsong" )
-		
 				net.WriteString("soundtrack/prep_phasenew2.wav") 
-		
 			net.Broadcast()
 			
 			if !ply:IsBot() then
 				ply:ConCommand("loadout")
 				
 			end
+		
+			round.LoadoutSpawning( ply )
+
+			ply:SetPos(Location[team.GetName( ply:Team() ).."-prep"].pos)
 			
-			if team.GetName(ply:Team()) == Config["Team2PrettyName"] then
+			if ply:GetPos() != Location[team.GetName( ply:Team() ).."-prep"].pos then
 			
-				ply:SetPos(Vector(4873.492188, -150.858917, 205.890381))
-				
-				if ply:GetPos() != Vector(4873.492188, -150.858917, 205.890381) then
-				
-					print("FUCK")
-					ply:SetPos(Vector(4873.492188, -150.858917, 205.890381))
-					
-				end
-				
-			elseif team.GetName(ply:Team()) == Config["Team1PrettyName"] then
-			
-				ply:SetPos(Vector(-3930.692627, 525.278259, 193.856583))
-				
-				if ply:GetPos() != Vector(-3930.692627, 525.278259, 193.856583) then
-				
-					print("FUCK")
-					ply:SetPos(Vector(-3930.692627, 525.278259, 193.856583))
-					
-				end
+				print("FUCK")
+				ply:SetPos(Location[team.GetName( ply:Team() ).."-prep"].pos)
 				
 			end
-			
+							
 		end
 		
 	end
@@ -357,27 +325,12 @@ function round.CapturePoint()
 		
 			round.LoadoutSpawning( ply )
 			
-			if team.GetName(ply:Team()) == Config["Team2PrettyName"] then
+			ply:SetPos(Location[team.GetName( ply:Team() ).."-Fight"].pos)
 			
-				ply:SetPos(Vector(3045.126953, -146.878693, 284.796997))
-				
-				if ply:GetPos() != Vector(3045.126953, -146.878693, 284.796997) then
-				
-					print("FUCK")
-					ply:SetPos(Vector(3045.126953, -146.878693, 284.796997))
-					
-				end
-				
-			elseif team.GetName(ply:Team()) == Config["Team1PrettyName"] then
+			if ply:GetPos() != Location[team.GetName( ply:Team() ).."-Fight"].pos then
 			
-				ply:SetPos(Vector(-3001.453369, 598.242676, 284.071167))
-				
-				if ply:GetPos() != Vector(-3001.453369, 598.242676, 284.071167) then
-				
-					print("FUCK")
-					ply:SetPos(Vector(-3001.453369, 598.242676, 284.071167))
-					
-				end
+				print("FUCK")
+				ply:SetPos(Location[team.GetName( ply:Team() ).."-Fight"].pos)
 				
 			end
 			
@@ -415,34 +368,18 @@ function round.CapturePoint()
 		SetGlobalString("GameTypeSelected", table.Random({GameType[1].name,GameType[2].name,GameType[3].name,GameType[4].name,GameType[5].name}))
 	end
 	round.Broadcast(GetGlobalString("GameTypeSelected"))
-	SetGlobalInt("GameType1votes", 0)
-	SetGlobalInt("GameType2votes", 0)
-	SetGlobalInt("GameType3votes", 0)
-	SetGlobalInt("GameType4votes", 0)
-	SetGlobalInt("GameType5votes", 0)
-	--SetGlobalInt("GameType6votes", 0)
 	
 	if GetGlobalString("GameTypeSelected") == GameType[2].name then
 	
 		for i=1, #Objectives do
 		
 			local objective = ents.Create( "farm_objective" )
-			if ( !IsValid( objective ) ) then print("objective"..i.." spawning failed") return end 
 			objective:SetPos( Objectives[i].pos )
 			objective:Spawn()
 			objective:DropToFloor()
 			objective:SetLetter(Objectives[i].letter)
-			print("objective"..i.." spawned")
 			
 		end
-
-		local barricade = ents.Create( "barricade" )
-	
-		if ( !IsValid( barricade ) ) then print("barricade spawning failed") return end 
-		barricade:SetPos( Location["Barricade"].pos )
-		barricade:Spawn()
-		barricade:DropToFloor()
-		print("barricade spawned")
 			
 		for k,v in pairs(ents.GetAll()) do
 			if string.find(v:GetClass(), "farm_objective") then
@@ -486,32 +423,15 @@ function round.CapturePoint()
 		end
 		
 		round.Broadcast(Config["TeaPartyDescriptionStart"] .. round.Time .. Config["TeaPartyDescriptionFinish"])
-
-	--[[elseif GetGlobalString("GameTypeSelected") == GameType[5].name then
-	
-		local objective = ents.Create( "paper_spawner" )
-		
-		if ( !IsValid( objective ) ) then print("paper spawning failed") return end 
-		objective:SetPos( Location["Paper"].pos )
-		objective:Spawn()
-		objective:DropToFloor()
-		SetGlobalInt("BritishPapers", 0)
-		SetGlobalInt("AmericanPapers", 0)
-		
-		round.Broadcast("Grab copies of The Federalist Papers and take them back to your base for the next " .. round.Time .. " seconds!")]]--
 		
 
 	elseif GetGlobalString("GameTypeSelected") == GameType[5].name then
-	
 		for i=1, #Objectives do
-		
 			local objective = ents.Create( "farm_objective" )
-			if ( !IsValid( objective ) ) then print("objective"..i.." spawning failed") return end 
 			objective:SetPos( Objectives[i].pos )
 			objective:Spawn()
 			objective:DropToFloor()
 			objective:SetLetter(Objectives[i].letter)
-			print("objective"..i.." spawned")
 			
 		end
 		local freedom_fighters = {}
@@ -523,28 +443,21 @@ function round.CapturePoint()
 				table.insert(freedom_fighters, v)
 			end
 		end
+
 		SetGlobalEntity("Team2VIP", table.Random(the_empire))
 		SetGlobalEntity("Team1VIP", table.Random(freedom_fighters))
 		round.Broadcast(GetGlobalEntity("Team2VIP"):Name() .. " is the British Commander!")
 		round.Broadcast(GetGlobalEntity("Team1VIP"):Name() .. " is the Rebel Commander!")
 		round.Broadcast("Protect your marked Commander while he captures points for " .. round.Time .. " seconds!")
-		
-
-		
 	elseif GetGlobalString("GameTypeSelected") == GameType[1].name then
-	
 		SetGlobalInt( "BritishKills", 0)
 		SetGlobalInt( "AmericanKills", 0)
 		round.Broadcast("Get the most kills for your team within " .. round.Time .. " seconds!")
-		
 	end
 	
 	for k,v in pairs(ents.GetAll()) do
-	
 		if string.find(v:GetClass(), "prop_ragdoll") then
-		
 			v:Remove()
-			
 		end
 		
 	end
@@ -1012,6 +925,3 @@ function round.LoadoutSpawning( ply )
 
 	ply:SetHealth(ply:GetMaxHealth())
 end
-
-
-include("plugins.lua") --Load last

@@ -1,60 +1,22 @@
-function IncludePlugins(dir)
-	MsgN("Starting to include CL Plugins!");
-	local fil, Folders = file.Find(dir.."*", "LUA")
-	MsgN("Total: ", table.Count(Folders));
-	
-	for k,v in pairs(Folders)do
-		if(v != "." and v != "..")then
-			local Files = file.Find(dir..v.."/*.lua", "LUA");
-			
-			for q,w in pairs(Files) do
-				include("plugins/"..v.."/"..w)
-			end
-		end
-	end
-end
-
 include( 'shared.lua' )
 
-// Clientside only stuff goes here
-
-function DrawVIP( ply )
+hook.Add( "PreDrawHalos", "VIPHalos", function()
 	if GetGlobalString("GameTypeSelected") == GameType[5].name then
-		local dist = LocalPlayer():GetPos():Distance(EyePos())
-		local dist_calc = dist / 10000
-		local mathmemes = 1 + dist_calc
-		local sizecalc = 255 * mathmemes
-		
-		if LocalPlayer() == ply then return end
-		if (GetGlobalEntity("Team2VIP") == ply) or (GetGlobalEntity("Team1VIP") == ply) then
-			local Head = ply:LookupBone("ValveBiped.Bip01_Head1")
-			local HeadPos, HeadAng = ply:GetBonePosition(Head)
-			local Pos = HeadPos + Vector(0, 0, 15)
-			local eyeang = LocalPlayer():EyeAngles().y - 90 -- Face upwards
-			local Ang = Angle( 0, eyeang, 90 )
-			
-			cam.Start3D2D(Pos + Vector(math.sin(CurTime()), 0, math.sin(CurTime()) * 2), Ang, 0.1)
-				cam.IgnoreZ( true )
-				
-					
-					
-					surface.SetDrawColor(255,255,255)
-					surface.SetMaterial( Material(  "materials/gui/contest-icon.png" ) ) 
-					surface.DrawTexturedRect(-sizecalc / 2,-400,sizecalc,sizecalc)
-					
-				
-					
-				cam.IgnoreZ( false )
-		
-			cam.End3D2D()
+		local green_shit = {}
+		local red_shit = {}
+		for fuck, shit in pairs( players.GetAll() ) do
+			if GetGlobalEntity("Team2VIP") == shit or GetGlobalEntity("Team1VIP") == shit then
+				if shit:Team() == LocalPlayer():Team() then
+					table.insert( green_shit, shit)
+				else
+					table.insert( red_shit, shit)
+				end
+			end
 		end
+		halo.Add( green_shit, Color( 0, 255, 0 ), 0, 0, 1, true, true)
+		halo.Add( red_shit, Color( 255, 0, 0 ), 0, 0, 1, true, true)
 	end
-end
-hook.Add( "PostPlayerDraw", "DrawVIP", DrawVIP )
-
-
-
-include("shared.lua")
+end )
 
 MsgN("Loading Clientside Files")
 for _, file in pairs(file.Find(Config["FolderName"] .. "/gamemode/client/*.lua", "LUA")) do
@@ -132,5 +94,3 @@ hook.Add( "RenderScreenspaceEffects", "dildo_mcnugget", function()
 	RunConsoleCommand("pp_vignette_constant", "1")
 	RunConsoleCommand("pp_vignette_passes", "1")
 end )
-
-IncludePlugins(Config["FolderName"] .. "/gamemode/plugins/") -- load last

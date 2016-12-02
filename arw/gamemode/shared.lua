@@ -286,18 +286,14 @@ Rank[Config["Team2PrettyName"] .. "-Major"] = {name = "Major", model = "models/k
 
 
 function GM:Initialize()
-
 	self.BaseClass.Initialize( self )
-	
 end
 
-team.SetUp( 1, "Undecieded", Color( 0, 204, 0, 255 ) ) 
+team.SetUp( 1, "Undecided", Color( 0, 204, 0, 255 ) ) 
 team.SetUp( 2, Config["Team1PrettyName"], Config["GM.Team1Color"] ) 
 team.SetUp( 3, Config["Team2PrettyName"], Config["GM.Team2Color"] ) 
-team.SetUp( 4, "Spectator", Color( 204, 0, 204, 255 ) ) 
 
 function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
-
 	if hitgroup == HITGROUP_HEAD then
 		if GetGlobalEntity("Team2VIP") == ply or GetGlobalEntity("Team1VIP") == ply then
 			dmginfo:ScaleDamage(1)
@@ -311,7 +307,6 @@ function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 			dmginfo:ScaleDamage(1)
 		end
 	end
-
 end
 
 function GM:PlayerButtonDown( ply, button )
@@ -530,12 +525,10 @@ function GM:PlayerButtonDown( ply, button )
 	end
 end
 
-local meta = FindMetaTable("Player")
+local level = FindMetaTable("Player")
 
-function meta:GetRank()
-	
-	local level = tonumber(self:GetNetworkedInt( "Level" ))
-
+function level:GetRank()
+	local level = tonumber(self:GetNetworkedInt("Level"))
 	if level >= 0 && level <= 9 then
 		return "Private"
 	elseif level >= 10 && level <= 14 then

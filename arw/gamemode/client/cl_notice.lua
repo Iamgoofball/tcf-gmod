@@ -21,7 +21,7 @@ module( "notification", package.seeall )
 
 local NoticeMaterial = {}
 
-NoticeMaterial[ NOTIFY_GENERIC ]	= Material( "materials/gui/notification-leader.png" )
+NoticeMaterial[ NOTIFY_GENERIC ]	= Material( "vgui/notices/hint" )
 NoticeMaterial[ NOTIFY_ERROR ]		= Material( "vgui/notices/error" )
 NoticeMaterial[ NOTIFY_UNDO ]		= Material( "vgui/notices/undo" )
 NoticeMaterial[ NOTIFY_HINT ]		= Material( "vgui/notices/hint" )
