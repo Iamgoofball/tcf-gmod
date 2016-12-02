@@ -1,10 +1,5 @@
-
 AddCSLuaFile( "cl_init.lua" )
-
 include( "shared.lua" )
-
-include( "resources.lua" )
-
 AddCSLuaFile( "shared.lua" )
 
 MsgN("_-_-_-_- Server Files -_-_-_-_")
@@ -49,19 +44,15 @@ end
 --///							  Round System								\\\--
 ---------------------------------------------------------------------------------
 local round = {}
-
 -- Variables
 round.PrepTime	= 30	-- 30 second prep
 round.Rest	= Config["RestTime"]	-- 30 second breaks
 round.Time	= Config["RoundTime"]	-- 5 minute rounds
-
 function round.Broadcast(Text)
-
 	for k, v in pairs(player.GetAll()) do
 		v:SendLua("GAMEMODE:AddNotify(\""..Text.."\", NOTIFY_GENERIC, 10)")
 	end
 	print(Text)
-	
 end
 
 function round.RestTime()
@@ -70,37 +61,23 @@ function round.RestTime()
 	SetGlobalInt( "GameState", 1 )
 	SetGlobalInt( "StateStartTime", RealTime())
 	SetGlobalInt( "StateEndTime", round.Rest)
-
 	local Players = player.GetAll()
-	
 	for i = 1, table.Count(Players) do
-	
 		local ply = Players[i]
-		
 		if team.GetName( ply:Team() ) != "Undecieded" then
-		
 			round.LoadoutSpawning( ply )
-
 			ply:SetPos(Location[team.GetName( ply:Team() ).."-spawn"].pos)
-			
 			if ply:GetPos() != Location[team.GetName( ply:Team() ).."-spawn"].pos then
-			
 				print("FUCK")
 				ply:SetPos(Location[team.GetName( ply:Team() ).."-spawn"].pos)
-				
 			end
-				
-			
 		end
-		
 	end
 	
 	local victory_for_freedom = 0
 	local victory_for_imperialism = 0
 	local who_won = "Tie"
-	
 	if GetGlobalString("GameTypeSelected") == GameType[1].name then
-	
 		victory_for_freedom = GetGlobalInt("AmericanKills")
 		victory_for_imperialism = GetGlobalInt("BritishKills")
 	elseif GetGlobalString("GameTypeSelected") == GameType[4].name then
@@ -110,46 +87,27 @@ function round.RestTime()
 			victory_for_freedom = 1
 		end
 	else
-	
 		for k,v in pairs(ents.GetAll()) do
-
 			if string.find(v:GetClass(), "farm_objective") then
-			
 				if v:GetControlTeam() == Config["Team1PrettyName"] then
-				
 					victory_for_freedom = victory_for_freedom + 1
-					
 				elseif v:GetControlTeam() == Config["Team2PrettyName"] then
-				
 					victory_for_imperialism = victory_for_imperialism + 1
-					
 				end
-				
 			end
-			
 		end
-		
 	end
-	
 	if victory_for_freedom > victory_for_imperialism then
-
 		who_won = Config["Team1Win"]
-		
 		for k,v in pairs(player.GetAll()) do
-	
 			if v:Team() == 2 then
-			
 				v:AddExp(Config["round-exp-reward"])
 				v:AddMoney(Config["round-cash-reward"])
 				v:AddTicket(1)
 				v:SendLua("surface.PlaySound('soundtrack/victory.wav')")
-				
 			elseif v:Team() == 3 then
-			
 				v:SendLua("surface.PlaySound('soundtrack/lossnew.wav')")
-				
 			end
-
 		end
 		if Config["VoiceActing"] == true then
 			local freedom_fighters = {}
@@ -171,25 +129,17 @@ function round.RestTime()
 			chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/cheers/" .. Config["Team1Name"] .. "-cheers-"..table.Random(sounds_r)..".wav")
 		end
 	elseif victory_for_imperialism > victory_for_freedom then
-	
 		who_won = Config["Team2Win"]
-		
 		for k,v in pairs(player.GetAll()) do
-	
 			if v:Team() == 3 then
-			
 				v:AddExp(Config["round-exp-reward"])
 				v:AddMoney(Config["round-cash-reward"])
 				v:AddTicket(1)
 				v:SendLua("surface.PlaySound('soundtrack/victory.wav')")
-				
 			elseif v:Team() == 2 then
 				v:SendLua("surface.PlaySound('soundtrack/lossnew.wav')")
-				
 			end
-			
 		end
-
 		if Config["VoiceActing"] == true then
 			local freedom_fighters = {}
 			local the_empire = {}
@@ -210,21 +160,14 @@ function round.RestTime()
 			chosen_rebel:EmitSound("voice/" .. Config["Team1Name"] .. "/jeers/" .. Config["Team1Name"] .. "-taunt-"..table.Random(sounds_r)..".wav")
 		end
 	elseif victory_for_freedom == victory_for_imperialism then
-	
 		who_won = Config["TieWin"]
-		
 		for k,v in pairs(player.GetAll()) do
-			
 			if v:Team() != 1 then
-			
 				v:AddExp(Config["round-exp-reward"] / 2)
 				v:AddMoney(Config["round-cash-reward"])
 				v:AddTicket(1)
-				
 				round.PlaySong("soundtrack/lossnew.wav") -- both sides lost
-				
 			end
-			
 		end
 		if Config["VoiceActing"] == true then
 			local freedom_fighters = {}
@@ -248,17 +191,11 @@ function round.RestTime()
 	end
 	
 	for k,v in pairs(ents.GetAll()) do
-	
 		if string.find(v:GetClass(), "farm_objective") or string.find(v:GetClass(), "barricade") or string.find(v:GetClass(), "tea_objective") then
-		
 			v:Remove()
-			
 		end
-		
 	end
-	
 	round.Broadcast("Round over, " .. who_won .. " Next round in " .. round.Rest .. " seconds!")
-	
 end
 
 function round.Prep()
@@ -370,42 +307,29 @@ function round.CapturePoint()
 	round.Broadcast(GetGlobalString("GameTypeSelected"))
 	
 	if GetGlobalString("GameTypeSelected") == GameType[2].name then
-	
 		for i=1, #Objectives do
-		
 			local objective = ents.Create( "farm_objective" )
 			objective:SetPos( Objectives[i].pos )
 			objective:Spawn()
 			objective:DropToFloor()
 			objective:SetLetter(Objectives[i].letter)
-			
 		end
-			
 		for k,v in pairs(ents.GetAll()) do
 			if string.find(v:GetClass(), "farm_objective") then
 				v:SetControlTeam("Neutral")
 			end
 		end
-		
 		round.Broadcast("You have " .. round.Time .. " seconds to capture and hold all the objectives!")
-		
 	elseif GetGlobalString("GameTypeSelected") == GameType[3].name then
-	
 		local objective = ents.Create( "farm_objective" )
-		
-		if ( !IsValid( objective ) ) then print("koth spawning failed") return end 
 		objective:SetPos( Location["KOTH"].pos )
 		objective:Spawn()
 		objective:DropToFloor()
 		objective:SetLetter("A")
 		objective:SetControlTeam("Neutral")
-		
 		round.Broadcast("Be the King of the Hill after " .. round.Time .. " seconds!")
-
 	elseif GetGlobalString("GameTypeSelected") == GameType[4].name then
-	
 		for i=1, #TeaCrates do
-		
 			local crate = ents.Create( "tea_objective" )
 			if ( !IsValid( crate ) ) then print("crate"..i.." spawning failed") return end 
 			crate:SetPos( TeaCrates[i].pos )
@@ -413,7 +337,6 @@ function round.CapturePoint()
 			crate:SetModel(Config["TeaPartyCrateModel"])
 			crate:DropToFloor()
 			print("crate"..i.." spawned")
-			
 		end
 		SetGlobalInt("TeaCratesLeft", 0)
 		for k,v in pairs(ents.GetAll()) do
@@ -421,10 +344,7 @@ function round.CapturePoint()
 				SetGlobalInt( "TeaCratesLeft", GetGlobalInt("TeaCratesLeft") + 1)
 			end
 		end
-		
 		round.Broadcast(Config["TeaPartyDescriptionStart"] .. round.Time .. Config["TeaPartyDescriptionFinish"])
-		
-
 	elseif GetGlobalString("GameTypeSelected") == GameType[5].name then
 		for i=1, #Objectives do
 			local objective = ents.Create( "farm_objective" )
@@ -432,7 +352,6 @@ function round.CapturePoint()
 			objective:Spawn()
 			objective:DropToFloor()
 			objective:SetLetter(Objectives[i].letter)
-			
 		end
 		local freedom_fighters = {}
 		local the_empire = {}
@@ -443,7 +362,6 @@ function round.CapturePoint()
 				table.insert(freedom_fighters, v)
 			end
 		end
-
 		SetGlobalEntity("Team2VIP", table.Random(the_empire))
 		SetGlobalEntity("Team1VIP", table.Random(freedom_fighters))
 		round.Broadcast(GetGlobalEntity("Team2VIP"):Name() .. " is the British Commander!")
@@ -527,86 +445,52 @@ function round.CantProgress()
 
 	local players_in_britbong_land = 0
 	local players_in_freedom_land = 0
-
 	local Players = player.GetAll()
-	
 	for i = 1, table.Count(Players) do
-	
 		local ply = Players[i]
-		
 		if team.GetName( ply:Team() ) == Config["Team1PrettyName"] then
-		
 			players_in_freedom_land = players_in_freedom_land + 1
-			
 		elseif team.GetName( ply:Team() ) == Config["Team2PrettyName"] then
-		
 			players_in_britbong_land = players_in_britbong_land + 1
-			
 		end
-		
 	end
 	
 	if players_in_britbong_land >= 1 && players_in_freedom_land >= 1 then
-	
 		return false
-		
 	else
-	
 		return true
-		
 	end
-	
 end
 
 function round.CheckRound()
-
 	if GetGlobalInt("GameState") == 1 then
-	
 		if (RealTime() - GetGlobalInt("StateStartTime")) > round.Rest then
-		
 			round.Prep()
-			
 		end
-		
 	elseif GetGlobalInt("GameState") == 2 then
-	
 		if (RealTime() - GetGlobalInt("StateStartTime")) > round.PrepTime then
-		
 			round.CapturePoint()
 			if Config["VoiceActing"] == true then
 				round.PrepLines()
 			end
-			
 		end
-		
 	elseif GetGlobalInt("GameState") == 3 then
-	
 		if (RealTime() - GetGlobalInt("StateStartTime")) > round.Time then
 			round.RestTime()
 			SetGlobalString("GameTypeSelected", "N/A")
 			SetGlobalEntity("Team2VIP", nil)
 			SetGlobalEntity("Team1VIP", nil)
-			
 		end
-		
 		if (RealTime() - GetGlobalInt("StateStartTime")) == (round.Time - 30) then
-		
 			round.PlaySong("soundtrack/last_30_secondsnew.wav")
-			
 		end
-		
 	end
-	
 end
 
 function round.PlaySong(a)
-	
 	net.Start( "playsong" )
-		
 		net.WriteString( a ) 
-		
 	net.Broadcast()
-	
 end
 
 function round.PrepLines()
@@ -659,39 +543,21 @@ end
 ---------------------------------------------------------------------------------
 
 function GM:ShowHelp( ply )
-
 	net.Start( "open_teammenu" )
 	net.Send( ply )
-	
-end
-
-
-function GM:ShowTeam( ply )
-
-	ply:ConCommand("motdpls")
 end
 
 net.Receive( "SetTeam", function( len, ply )
-	
 	local Team = net.ReadUInt( 8 ) 
 	ply:SetTeam(Team)
-	
 	if GetGlobalInt("GameState") == 1 then
-	
 		ply:SetPos(Location[team.GetName( ply:Team() ).."-spawn"].pos)
-		
 	elseif GetGlobalInt("GameState") == 2 then
-	
 		ply:SetPos(Location[team.GetName( ply:Team() ).."-prep"].pos)
-		
 	elseif GetGlobalInt("GameState") == 3 then
-	
 		ply:SetPos(Location[team.GetName( ply:Team() ).."-Fight"].pos)
-		
 	end
-	
 	ply:SetModel(Rank[team.GetName( ply:Team() ).."-"..ply:GetRank()].model)
-	
 	round.LoadoutSpawning( ply )
 	if GetGlobalInt("GameState") == 2 and round.CantProgress() != true then
 		if !ply:IsBot() then
@@ -701,19 +567,7 @@ net.Receive( "SetTeam", function( len, ply )
 end )
 
 function GM:PlayerDeath( victim, inflictor, attacker )
-	
 	if ( victim != attacker ) then
-		
-		if tonumber(victim:GetLevel()) > tonumber(attacker:GetLevel()) then -- attacker gets more exp for killing someone of a higher rank
-		
-			attacker:AddExp(Config["kill-reward"] * 2)
-			
-		else
-		
-			attacker:AddExp(Config["kill-reward"])
-			
-		end
-		
 		if victim:Team() == 2 then
 			print("BRIT KILLS " .. GetGlobalInt("BritishKills"))
 		
@@ -745,7 +599,6 @@ end
 
 
 function GM:DoPlayerDeath(ply, attacker, dmginfo) -- shamelessly lifted from TTT
-
 	local rag = ents.Create("prop_ragdoll")
 	rag.player_ragdoll = true
 	rag.myteam = ply:Team()
@@ -810,118 +663,60 @@ function GM:PlayerInitialSpawn( ply )
 		net.Send( ply )
 		ply:SetPData("Tutorial", 0)
 	end	
-	ply:ConCommand("motdpls")
 end 
-
-hook.Add( "PlayerSay", "OpenMOTD", function( ply, text, public )
-	text = string.lower( text )
-	if ( text == "!motd" ) then
-		ply:ConCommand("motdpls")
-		return ""
-	end
-end )
 
 
 function GM:PlayerLoadout( ply )
-
 	GAMEMODE:SetPlayerSpeed(ply, 100, 250)
-	
 	-- sends player to the right place when spawning
 	if team.GetName( ply:Team() ) != "Undecieded" then
-	
 		if GetGlobalInt("GameState") == 1 then
-		
 			ply:SetPos(Location[team.GetName( ply:Team() ).."-spawn"].pos)
-			
 		elseif GetGlobalInt("GameState") == 2 then
-		
 			ply:SetPos(Location[team.GetName( ply:Team() ).."-prep"].pos)
-			
 		elseif GetGlobalInt("GameState") == 3 then
-		
 			ply:SetPos(Location[team.GetName( ply:Team() ).."-Fight"].pos)
-			
 		end
-		
 	end
-	
 	round.LoadoutSpawning(ply)
-	
 	ply:SetNoCollideWithTeammates(true)
-	
 end
 
 
 function GM:PlayerShouldTakeDamage( ply, victim )
-
 	if ply:IsPlayer() then
-	
 		if ply:Team() == victim:Team() then
-		
 			return false
-			
 		end
-		
 	end
-	
 	return true
 end 
 
 function round.LoadoutSpawning( ply )
-
 	ply:StripWeapons()
 	ply:StripAmmo()
-	
-	
-	-- Primary -- 
 	if ply:GetNWInt("primary") != 0 then
-	
 		ply:Give(ply:GetNWInt("primary"))
-		
 	else
-	
 		if ply:Team() == 2 then
-	
 			ply:Give(Config["Team1DefaultPrimary"])
-			
 		elseif ply:Team() == 3 then
-		
 			ply:Give("tfa_british_rifle_1")
-			
 		end
-		
 	end
-	
-	-- Secondary --
 	if ply:GetNWInt("secondary") != 0 then
-	
 		ply:Give(ply:GetNWInt("secondary"))
-		
 	else
-	
 		if team.GetName( ply:Team() ) == Config["Team1PrettyName"] then
-	
 			ply:Give(Config["Team1DefaultSecondary"])
-			
 		elseif team.GetName( ply:Team() ) == Config["Team2PrettyName"] then
-		
 			ply:Give(Config["Team2DefaultSecondary"])
-			
 		end
-		
 	end
-	
-	-- Sword --
 	if team.GetName( ply:Team() ) == Config["Team1PrettyName"] then
-	
 		ply:Give(Config["Team1DefaultMelee"])
-		
 	elseif team.GetName( ply:Team() ) == Config["Team2PrettyName"] then
-	
 		ply:Give(Config["Team2DefaultMelee"])
-		
 	end
-
-
 	ply:SetHealth(ply:GetMaxHealth())
 end

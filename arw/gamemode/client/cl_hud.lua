@@ -159,7 +159,6 @@ function hud()
 	surface.SetMaterial( Material(  "materials/gui/main-hud.png" ) )  --Use dir icon16/ for silkicons
 	surface.DrawTexturedRect(0, ScrH()-150,350,150)
 	
-	--draw.RoundedBoxEx( 0, 0, ScrH()-150, 350, 150, Color(100,90,40), false, false, false, false ) -- background bar
 	draw.SimpleText(LocalPlayer():Nick(), "Basic_Font_Screen", 95, ScrH() - 120, Color(255,255,255), TEXT_ALIGN_CENTER)
 	draw.SimpleText("$"..LocalPlayer():GetNetworkedInt( "Money" ), "Basic_Font_Screen", 234, ScrH() - 120, Color(255,255,255), TEXT_ALIGN_CENTER)
 
@@ -194,7 +193,7 @@ function hud()
 		draw.SimpleText("0 - Close", "Basic_Font_Screen", ScrW() - 120, 300 + 180, Color(255,255,255), TEXT_ALIGN_CENTER)
 	end
 end
-hook.Add("HUDPaint", "WeedHud", hud) 
+hook.Add("HUDPaint", "TCFHud", hud) 
 
 -- Hide hud --
 function hidehud(name)
