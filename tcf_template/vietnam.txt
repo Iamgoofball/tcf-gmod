@@ -1,0 +1,11 @@
+"gamemode"
+{
+    "title"     "Vietnam War RP"
+    "maps"      "^vietnam_"
+    "base"      "tcf_base"
+    "menusystem"	"1"
+
+    "author_name"   "Senpai Noodles and Iamgoofball"
+    "author_email"  "n/a"
+    "author_url"    "http://steamcommunity.com/groups/electricmangocommunity"
+}

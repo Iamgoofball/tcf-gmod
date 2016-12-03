@@ -156,21 +156,23 @@ function tutorialmenu()
 	DLabel:SizeToContents()
 	function DLabel:Paint()
 		if page == 1 then
-			DLabel:SetText( "Hello, I see you are new to the field.\nI am Commander Tut Orial." )
+			DLabel:SetText( "Hello, I see you are new to the regiment.\nI am Commander George Washington." )
 		elseif page == 2 then
-			DLabel:SetText( "After finishing this tutorial, you may pick a side in the battle!\nDuring the Rest phase is the only time you can\nswitch teams with F1." )
+			DLabel:SetText( "Welcome to the Revolutionary War!\nThe American Rebels fight against the British Empire\nfor independence!" )
 		elseif page == 3 then
-			DLabel:SetText( "To start off, the game runs in 3 different phases.\nThe phases are as follows: Rest, Prep, and Battle!" )
+			DLabel:SetText( "After finishing this tutorial, you may pick a side in the battle!\nDuring the Rest phase is the only time you can\nswitch teams with F1." )
 		elseif page == 4 then
-			DLabel:SetText( "During the Rest phase, the teams are in their bases.\nUse this time to plan and strategize!" )
+			DLabel:SetText( "To start off, the game runs in 3 different phases.\nThe phases are as follows: Rest, Prep, and Battle!" )
 		elseif page == 5 then
-			DLabel:SetText( "During the Prep phase, the teams are in the loadout menu.\nYou can also vote on the Round-Type with Tickets!" )
+			DLabel:SetText( "During the Rest phase, the teams are in their bases.\nUse this time to plan and strategize!" )
 		elseif page == 6 then
-			DLabel:SetText( "During the Battle phase, the teams are on the field\ncompleting their objectives.\nPay attention to the notifications in the bottom right!" )
+			DLabel:SetText( "During the Prep phase, the teams are in the loadout menu.\nYou can also vote on the Round-Type with Tickets!" )
 		elseif page == 7 then
-			DLabel:SetText( "Winning battles and accomplishing objectives gets you\nMoney, Experience, and Tickets.\nUse experience to level up and get new guns!\nUse Tickets to vote on gamemodes!" )
+			DLabel:SetText( "During the Battle phase, the teams are on the field\ncompleting their objectives.\nPay attention to the notifications in the bottom right!" )
 		elseif page == 8 then
-			DLabel:SetText( "Congratulations, you're ready for combat!\nNow get out there and seize the day!" )
+			DLabel:SetText( "Winning battles and accomplishing objectives gets you\nMoney, Experience, and Tickets.\nUse experience to level up and get new guns!\nUse Tickets to vote on gamemodes!" )
+		elseif page == 9 then
+			DLabel:SetText( "Congratulations, you're ready for combat!\nNow get out there and shoot some redcoats!" )
 		end
 		DLabel:SizeToContents()
 	end
@@ -185,6 +187,10 @@ function tutorialmenu()
 		
 		surface.SetDrawColor(0,0,0) -- frame outline
 		surface.DrawOutlinedRect(0,0,self:GetWide(),self:GetTall())
+
+		surface.SetDrawColor(255,255,255)
+		surface.SetMaterial( Material(  "materials/gui/notification-leader.png" ) ) 
+		surface.DrawTexturedRect(730, 120 ,50,50)
 	end
 
 
@@ -200,9 +206,9 @@ function tutorialmenu()
 	end
 	
 	function Close.DoClick() 
-		if page != 8 then
+		if page != 9 then
 			page = page + 1
-			if page == 8 then
+			if page == 9 then
 				Close:SetText("X")
 			end
 			DLabel:Paint()
