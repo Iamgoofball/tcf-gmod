@@ -306,7 +306,12 @@ function round.CapturePoint()
 		SetGlobalString("GameTypeSelected", table.Random({GameType[1].name,GameType[2].name,GameType[3].name,GameType[4].name,GameType[5].name}))
 	end
 	round.Broadcast(GetGlobalString("GameTypeSelected"))
-	
+	SetGlobalInt( "GameType1votes", 0 )
+	SetGlobalInt( "GameType2votes", 0 )
+	SetGlobalInt( "GameType3votes", 0 )
+	SetGlobalInt( "GameType4votes", 0 )
+	SetGlobalInt( "GameType5votes", 0 )
+	SetGlobalInt( "GameType6votes", 0 )
 	if GetGlobalString("GameTypeSelected") == GameType[2].name then
 		for i=1, #Objectives do
 			local objective = ents.Create( "farm_objective" )
