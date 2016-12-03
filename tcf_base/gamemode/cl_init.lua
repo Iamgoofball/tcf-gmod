@@ -89,9 +89,7 @@ hook.Add( "RenderScreenspaceEffects", "dildo_mcnugget", function()
 	RunConsoleCommand("pp_vignette_passes", "1")
 end )
 
-function GM:SetupWorldFog()
-	render.FogMode(MATERIAL_FOG_NONE)
-end
+
 
 MsgN("Loading Clientside Files")
 for _, file in pairs(file.Find(Config["FolderName"] .. "/gamemode/client/*.lua", "LUA")) do
