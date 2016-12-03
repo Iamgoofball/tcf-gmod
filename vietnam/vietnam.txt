@@ -1,7 +1,7 @@
 "gamemode"
 {
-    "title"     "American Revolutionary War RP"
-    "maps"      "^arw_"
+    "title"     "Vietnam War RP"
+    "maps"      "^vietnam_"
     "base"      "tcf_base"
     "menusystem"	"1"
 

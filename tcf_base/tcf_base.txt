@@ -1,0 +1,11 @@
+"gamemode"
+{
+    "title"     "Team Combat Framework"
+    "maps"      "^tcf_"
+    "base"      "base"
+    "menusystem"	"1"
+
+    "author_name"   "Senpai Noodles and Iamgoofball"
+    "author_email"  "n/a"
+    "author_url"    "https://github.com/Iamgoofball/tcf-gmod"
+}
