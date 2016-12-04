@@ -335,9 +335,8 @@ Location["Paper"] = {pos = Vector(-790.058105, -45.686008, 213.875656)}
 -- All the objectives for Capture Points. Feel free to add/remove as many as you like, as long as there is at least one on the map.
 Objectives = {}
 Objectives[2] = {pos = Vector(4691.348633, 5451.136230, -1692.217651), letter = "A"}
-Objectives[1] = {pos = Vector(72.087097, -1270.106201, -1692.196655), letter = "B"}
-Objectives[3] = {pos = Vector(-4593.367676, -3112.324463, -1904.788330), letter = "C"}
-Objectives[4] = {pos = Vector(4712.957520, -3098.654297, -1708.214722), letter = "D"}
+Objectives[1] = {pos = Vector(4740.453613, -2990.869629, -1708.269043), letter = "B"}
+Objectives[3] = {pos = Vector(1906.654175, 8093.217773, -1692.223511), letter = "C"}
 
 TeaCrates = {}
 -- All the objectives for Tea Party(or whatever you rename it). Feel free to add/remove as many as you like, as long as there is at least one on the map.
