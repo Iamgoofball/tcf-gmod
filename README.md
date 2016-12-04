@@ -1,18 +1,43 @@
 # Team Combat Framework
 
-# Configure the gamemode with arw/gamemode/shared.lua.
-
 This is the home of the source code of the Team Combat Framework gamemode for Garry's Mod, created by Senpai Noodles and Iamgoofball.
 
-By default, it is themed for American Revolutionary War, and requires the following assets:
-1. http://steamcommunity.com/sharedfiles/filedetails/?id=271032984
-2. http://steamcommunity.com/sharedfiles/filedetails/?id=804680245
-3. http://steamcommunity.com/sharedfiles/filedetails/?id=806499234
-Please make sure these are all installed on your server.
-
 # Installation
-Drag/drop the "arw" folder into your gamemodes folder on the server.
-Ensure all addons mentioned above are installed and being sent to clients.
-Set the map to arw_fields.
+## Pre-made Template
+### Vietnam
+1. Make sure the workshop collection on your server is set to the following:
 
-Enjoy!
+http://steamcommunity.com/sharedfiles/filedetails/?id=811148202
+
+2. Drag in tcf-base and vietnam to your gamemodes folder.
+
+3. Set gamemode to "vietnam".
+
+4. Set map to rp_nn_vietnam2.
+
+### ARW
+
+1. Make sure the workshop collection on your server is set to the following:
+
+http://steamcommunity.com/sharedfiles/filedetails/?id=811148202
+
+2. Drag in tcf-base and arw to your gamemodes folder.
+
+3. Set gamemode to "arw".
+
+4. Set map to arw_fields.
+
+## Make Your Own
+1. Ensure the following addon is included in your server workshop collection:
+
+http://steamcommunity.com/sharedfiles/filedetails/?id=811241240
+
+2. Copy tcf_base and tcf_template to your gamemodes folder.
+
+3. Rename tcf_template to whatever you want the gamemode folder name to be.
+
+4. Navigate to your_folder_name_here/gamemode/shared.lua.
+
+5. Follow the instructions in there.
+
+6. Set gamemode to your_folder_name_here.
