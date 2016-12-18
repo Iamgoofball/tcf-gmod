@@ -19,7 +19,7 @@ http://steamcommunity.com/sharedfiles/filedetails/?id=811148202
 
 1. Make sure the workshop collection on your server is set to the following:
 
-http://steamcommunity.com/sharedfiles/filedetails/?id=811148202
+http://steamcommunity.com/sharedfiles/filedetails/?id=811147340
 
 2. Drag in tcf-base and arw to your gamemodes folder.
 
