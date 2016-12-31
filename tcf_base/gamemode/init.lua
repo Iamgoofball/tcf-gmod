@@ -23,6 +23,7 @@ for _, file in pairs (file.Find(Config["FolderName"] .. "/gamemode/client/*.lua"
    MsgN("-> "..file)
    AddCSLuaFile(Config["FolderName"] .. "/gamemode/client/"..file)
 end
+MsgN("SERVER: finished Loading Client Files")
 function GM:Initialize()
 
    util.AddNetworkString( 'open_teammenu' )
