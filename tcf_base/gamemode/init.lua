@@ -25,18 +25,19 @@ for _, file in pairs (file.Find(Config["FolderName"] .. "/gamemode/client/*.lua"
 end
 MsgN("SERVER: finished Loading Client Files")
 function GM:Initialize()
-
-   util.AddNetworkString( 'open_teammenu' )
-   util.AddNetworkString( 'open_settings' )
-   util.AddNetworkString( 'open_tutorial' )
-   util.AddNetworkString( 'open_loadout' )
-   util.AddNetworkString( 'SetTeam' )
-   util.AddNetworkString( 'playsong' )
-
+	MsgN("SERVER: start network string memes")
+	util.AddNetworkString( 'open_teammenu' )
+	util.AddNetworkString( 'open_settings' )
+	util.AddNetworkString( 'open_tutorial' )
+	util.AddNetworkString( 'open_loadout' )
+	util.AddNetworkString( 'SetTeam' )
+	util.AddNetworkString( 'playsong' )
+	MsgN("SERVER: end network string memes, start global inits")
    
-   SetGlobalInt( "GameState", 1 ) -- 1/rest 2/prep 3/battle
-   SetGlobalInt( "StateStartTime", RealTime())
-   SetGlobalString( "GameTypeSelected", nil)
+	SetGlobalInt( "GameState", 1 ) -- 1/rest 2/prep 3/battle
+	SetGlobalInt( "StateStartTime", RealTime())
+	SetGlobalString( "GameTypeSelected", nil)
+	MsgN("SERVER: end global inits")
    
 end
 
