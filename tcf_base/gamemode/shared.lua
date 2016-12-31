@@ -245,15 +245,6 @@ Rank[Config["Team2PrettyName"] .. "-Captain"] = {name = "Captain", model = "mode
 Rank[Config["Team1PrettyName"] .. "-Major"] = {name = "Major", model = "models/kriegsyntax/awoi/rebels/private/playermodel.mdl"}
 Rank[Config["Team2PrettyName"] .. "-Major"] = {name = "Major", model = "models/kriegsyntax/awoi/british/private/playermodel.mdl"}
 
-
-
-
-
-
-function GM:Initialize()
-	self.BaseClass.Initialize( self )
-end
-
 team.SetUp( 1, "Undecieded", Color( 0, 204, 0, 255 ) ) 
 team.SetUp( 2, Config["Team1PrettyName"], Config["GM.Team1Color"] ) 
 team.SetUp( 3, Config["Team2PrettyName"], Config["GM.Team2Color"] ) 
