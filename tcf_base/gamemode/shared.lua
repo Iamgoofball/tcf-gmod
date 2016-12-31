@@ -2,6 +2,7 @@ GM.Name 	= "American Revolutionary War RP" -- Rename this to what category you w
 GM.Author 	= "Senpai Noodles and Iamgoofball"
 GM.Email 	= "N/A"
 GM.Website 	= "N/A"
+DeriveGamemode( "base" )
 --[[
 				SETUP TUTORIAL:
 		1. Make sure FolderName config is set properly. VERY IMPORTANT!!!
