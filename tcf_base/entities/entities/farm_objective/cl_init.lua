@@ -69,7 +69,6 @@ function ENT:Draw()
 		cam.IgnoreZ( true )
 		
 			surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
-			render.FogMode( MATERIAL_FOG_NONE ) -- Disabling the Fog
 
 			if self:GetControlTeam() == "Contested" or self:GetControlTeam() == "Neutral" then
 				
@@ -81,7 +80,6 @@ function ENT:Draw()
 			end
 			
 			surface.DrawTexturedRect( -sizecalc / 2, -4200, sizecalc, sizecalc )
-			render.FogMode( MATERIAL_FOG_LINEAR ) -- Enabling the Fog again, so the Letter won't show all the way.
 			draw.SimpleTextOutlined(self:GetLetter(), "Objective_Letter", 0, sizecalc - 1000, Color(255, 255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0, 0, 0, 150))
 			
 		cam.IgnoreZ( false )

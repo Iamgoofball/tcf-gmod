@@ -4,7 +4,7 @@ hook.Add( "PreDrawHalos", "VIPHalos", function()
 	if GetGlobalString("GameTypeSelected") == GameType[5].name then
 		local green_shit = {}
 		local red_shit = {}
-		for fuck, shit in pairs( players.GetAll() ) do
+		for fuck, shit in pairs( player.GetAll() ) do
 			if GetGlobalEntity("Team2VIP") == shit or GetGlobalEntity("Team1VIP") == shit then
 				if shit:Team() == LocalPlayer():Team() then
 					table.insert( green_shit, shit)
@@ -67,28 +67,6 @@ surface.CreateFont( "Basic_Font_3D_Small", {
 	antialias 	= true,
 	prettyblur = 1,
 })
-local tab = {
-	["$pp_colour_addr"] = 0,
-	["$pp_colour_addg"] = 0,
-	["$pp_colour_addb"] = 0,
-	["$pp_colour_brightness"] = 0,
-	["$pp_colour_contrast"] = 1.25,
-	["$pp_colour_colour"] = 1,
-	["$pp_colour_mulr"] = 0,
-	["$pp_colour_mulg"] = 0,
-	["$pp_colour_mulb"] = 0
-}
-hook.Add( "RenderScreenspaceEffects", "dildo_mcnugget", function()
-	DrawColorModify( tab ) --Draws Color Modify effect
-	RunConsoleCommand("pp_bokeh", "1")
-	RunConsoleCommand("pp_bokeh_blur", "0.640000")
-	RunConsoleCommand("pp_bokeh_distance", "0")
-	RunConsoleCommand("pp_bokeh_focus", "24")
-	RunConsoleCommand("pp_vignette", "1")
-	RunConsoleCommand("pp_vignette_constant", "1")
-	RunConsoleCommand("pp_vignette_passes", "1")
-end )
-
 
 
 MsgN("Loading Clientside Files")

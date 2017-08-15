@@ -33,10 +33,9 @@ function ENT:Draw()
 			local wi = 460
 			local width = self:GetEntHealth()/maxhealth*(wi)
 			local width = math.Clamp(width, 0, wi)
-			smooth = math.Approach(smooth, width, 100*FrameTime())
 			
 			surface.SetDrawColor( 90, 0, 0, 255 )
-			surface.DrawRect( -230, 20, smooth, 60 )
+			surface.DrawRect( -230, 20, Lerp(8 * FrameTime(), width, 460), 60 )
 			if LocalPlayer():Team() == 3 then
 				
 				surface.SetDrawColor(255,255,255, 255)

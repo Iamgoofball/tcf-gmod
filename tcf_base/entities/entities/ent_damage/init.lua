@@ -24,7 +24,8 @@ end
 
 function ENT:OnTakeDamage(dmg)
 	if self.TeamCheck != 0 then
-		if dmg:GetInflictor():Team() == self.TeamCheck then
+		print(dmg:GetInflictor():GetOwner())
+		if dmg:GetInflictor():GetOwner():Team() == self.TeamCheck then
 			return
 		end
 	end
@@ -39,7 +40,7 @@ function ENT:OnTakeDamage(dmg)
 	if(self.EntHealth <= 0) then 
 		self:EmitSound(self.SoundToMake)
 		
-		dmg:GetInflictor():AddExp(Config["barricade-reward"])
+		dmg:GetInflictor():GetOwner():AddExp(Config["barricade-reward"])
 		
 		self:Remove()
 		
