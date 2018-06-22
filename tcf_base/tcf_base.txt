@@ -1,4 +1,4 @@
-"gamemode"
+"tcf_base"
 {
     "title"     "Team Combat Framework"
     "maps"      "^tcf_"

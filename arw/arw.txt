@@ -1,0 +1,7 @@
+"arw"
+{
+    "title"     "American Revolutionary War RP"
+    "maps"      "^arw_"
+    "base"      "tcf_base"
+    "menusystem"	"1"
+}
